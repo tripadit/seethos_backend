@@ -1,0 +1,6 @@
+venv
+.idea
+docker-run.sh
+**__pycache__**
+.env
+config.json

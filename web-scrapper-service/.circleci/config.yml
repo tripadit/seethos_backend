@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      host:
+        type: string
+        default: $DEV_HOST
+    steps:
+      - checkout
+      - run:
+          name: Deploy code to ec2 instance
+          command: |
+            ssh -o StrictHostKeyChecking=no << parameters.host >> 'exit'
+            ssh << parameters.host >> 'rm -rf ~/web-scrapper-service/ || true'
+            scp -r /home/circleci/project/ << parameters.host >>:~/web-scrapper-service/
+            ssh << parameters.host >> 'cd ~/web-scrapper-service/ && docker-compose --env-file env/.env.prod up -d --build'
+
+workflows:
+  version: 2
+
+  build-deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+                - main

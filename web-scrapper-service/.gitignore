@@ -1,0 +1,13 @@
+.idea
+.vscode
+
+# python
+venv
+**__pycache__**
+
+# env files
+.env
+
+# misc
+*.log
+docker-run.sh

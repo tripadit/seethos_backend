@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Chat</title>
+  </head>
+  <body>
+    <h1>WebSocket Chat</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Enter your message" />
+    <input type="file" id="audio-input" accept="audio/*" />
+    <button id="send-button">Send</button>
+    <button id="record-button">Record</button>
+
+    <script>
+      const chatBox = document.getElementById("chat-box");
+      const messageInput = document.getElementById("message-input");
+      const audioInput = document.getElementById("audio-input");
+      const sendButton = document.getElementById("send-button");
+      const recordButton = document.getElementById("record-button");
+
+      const params = new URLSearchParams(window.location.search);
+
+      let bot_id = params.get("bot_id");
+      let websocket;
+      let sessionId; 
+      let mediaRecorder;
+      let chunks = [];
+
+      function generateSessionId() {
+        return Math.random().toString(36).substring(2);
+      }
+
+      function connectWebSocket() {
+        sessionId = generateSessionId(); 
+        websocket = new WebSocket(
+          `ws://127.0.0.1:8011/ws/bot?id=${bot_id}&session_id=${sessionId}`
+        );
+
+        websocket.onopen = function (event) {
+          console.log("WebSocket connection opened");
+        };
+
+        websocket.onmessage = function (event) {
+          const message = event.data;
+          if (message instanceof Blob) {
+            const audioUrl = URL.createObjectURL(message);
+            const audioElement = document.createElement("audio");
+            audioElement.src = audioUrl;
+            audioElement.controls = true;
+            appendMessage("Audio file received");
+            chatBox.appendChild(audioElement);
+          } else {
+            appendMessage(message);
+          }
+        };
+
+        websocket.onclose = function (event) {
+          console.log("WebSocket connection closed");
+        };
+      }
+
+      function sendMessage() {
+        const message = messageInput.value;
+        if (message) {
+          const payload = JSON.stringify({ type: "text", content: message });
+          websocket.send(payload);
+          appendMessage("You: " + message);
+          messageInput.value = "";
+        }
+      }
+
+      function sendAudio() {
+        const file = audioInput.files[0];
+        if (file) {
+          // First, send a JSON message indicating that an audio file will follow
+          const audioIndicator = JSON.stringify({ type: "audio" });
+          websocket.send(audioIndicator);
+
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const audioData = event.target.result;
+            websocket.send(audioData);
+            appendMessage("You sent an audio file");
+          };
+          reader.readAsArrayBuffer(file); // Use readAsArrayBuffer for binary data
+        }
+      }
+
+      function startRecording() {
+        navigator.mediaDevices
+          .getUserMedia({ audio: true })
+          .then(function (stream) {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.start();
+
+            mediaRecorder.addEventListener("dataavailable", function (event) {
+              chunks.push(event.data);
+            });
+
+            mediaRecorder.addEventListener("stop", function () {
+              const audioBlob = new Blob(chunks, { type: "audio/webm" });
+              websocket.send(audioBlob);
+              appendMessage("You sent a recorded audio file");
+              chunks = [];
+            });
+          })
+          .catch(function (error) {
+            console.error("Error accessing microphone:", error);
+          });
+      }
+
+      function stopRecording() {
+        mediaRecorder.stop();
+      }
+
+      function appendMessage(message) {
+        const messageElement = document.createElement("p");
+        messageElement.textContent = message;
+        chatBox.appendChild(messageElement);
+      }
+
+      connectWebSocket();
+      sendButton.addEventListener("click", function () {
+        // Determine if a file is selected, if so, prioritize sending the file
+        if (audioInput.files.length > 0) {
+          sendAudio();
+        } else {
+          sendMessage();
+        }
+      });
+
+      messageInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      });
+
+      recordButton.addEventListener("click", function () {
+        if (recordButton.textContent === "Record") {
+          startRecording();
+          recordButton.textContent = "Stop Recording";
+        } else {
+          stopRecording();
+          recordButton.textContent = "Record";
+        }
+      });
+    </script>
+  </body>
+</html>

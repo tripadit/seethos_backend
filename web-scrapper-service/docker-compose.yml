@@ -1,0 +1,80 @@
+version: "3.3"
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: ./compose/fastapi.Dockerfile
+    ports:
+      - "127.0.0.1:8000:8000"
+    container_name: scrapper-api
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      VIRTUAL_HOST: "https://scrapper.seethoschatbot.ai"
+    networks:
+      - scrapper
+      - frontend
+    depends_on:
+      - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: ./compose/celery.Dockerfile
+    container_name: scrapper-celery-worker
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+    networks:
+      - scrapper
+    depends_on:
+      - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+
+  celery_flower:
+    build:
+      context: .
+      dockerfile: ./compose/flower.Dockerfile
+    container_name: scrapper-celery-flower
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+    ports:
+      - "127.0.0.1:5555:80"
+    networks:
+      - scrapper
+    depends_on:
+      - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+
+  redis:
+    image: redis
+    container_name: scrapper-redis
+    networks:
+      - scrapper
+    expose:
+      - "6379"
+    volumes:
+      - redis_db:/data
+
+networks:
+  scrapper:
+    driver: bridge
+  frontend:
+    external: true
+
+
+volumes:
+  redis_db:
+    driver: local

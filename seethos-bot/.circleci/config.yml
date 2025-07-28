@@ -1,0 +1,65 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: cimg/base:stable
+
+jobs:
+
+  deploy:
+    executor: default
+    parameters:
+      env-file:
+        type: string
+        default: env/.env.docker
+      host:
+        type: string
+        default: $DEV_HOST
+    steps:
+      - checkout
+      - run:
+          name: Deploy bot handler service to ec2 instance
+          command: |
+            ssh -o StrictHostKeyChecking=no << parameters.host >> 'exit'
+            ssh << parameters.host >> 'rm -rf ~/seethoschatbotai-bot/ || true'
+            scp -r /home/circleci/project/ << parameters.host >>:~/seethoschatbotai-bot/
+            ssh << parameters.host >> 'cd ~/seethoschatbotai-bot && docker build -f Dockerfile -t seethoschatbotai-bot:latest .'
+            ssh << parameters.host >> 'cd ~/seethoschatbotai-bot && docker container rm -f seethoschatbotai-bot || true'
+            ssh << parameters.host >> 'cd ~/seethoschatbotai-bot && docker image prune -f'
+            ssh << parameters.host >> 'cd ~/seethoschatbotai-bot && docker run -d --network frontend --env-file << parameters.env-file >> --name seethoschatbotai-bot seethoschatbotai-bot:latest'
+
+
+workflows:
+  version: 2
+
+  deploy-bot-alpha:
+    jobs:
+      - deploy:
+          env-file: env/.env.dev.docker
+          host: $DEV_HOST
+          filters:
+            branches:
+              only:
+                - develop
+
+  deploy-bot-prod:
+    jobs:
+      - deploy:
+          env-file: env/.env.prod.docker
+          host: $PROD_HOST
+          filters:
+            branches:
+              only:
+                - main
+                - pp/prod-deployment
+  
+  deploy-bot-seethos:
+    jobs:
+      - deploy:
+          env-file: env/.env.seethos.docker
+          host: $SEETHOS
+          filters:
+            branches:
+              only:
+                - seethos

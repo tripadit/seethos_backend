@@ -1,0 +1,10 @@
+{
+    "name": "Local Chatbot",
+    "company_name": "Local Company",
+    "assistant_role": "a helpful local assistant",
+    "questions": [],
+    "call_to_action_prompt": "How can I help you today?",
+    "greeting_message": "Hello! I'm your local chatbot. How can I assist you?",
+    "file_url": null,
+    "system_prompt": "You are a helpful local assistant."
+}
