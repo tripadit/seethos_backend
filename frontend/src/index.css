@@ -1,0 +1,691 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.question-add-icon path {
+  @apply stroke-purple-500;
+}
+
+.hero-section {
+  background: url('./assets/images/hero-section-background.png');
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+.btn-gradient {
+  background: linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%),
+    linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%);
+  font-weight: 600;
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  @apply px-[30px] py-[10px];
+}
+.btn-gradient-withoutpd {
+  background: linear-gradient(93.57deg, #a634dc 0%, #5b1ce1 99.68%) !important;
+  @apply px-0 py-[10px] rounded-md;
+}
+
+.how-it-works {
+  background: url('./assets/images/how-it-works-background.png');
+
+  background-repeat: no-repeat;
+}
+
+.hero-section-container {
+  background: url('./assets/images/background-lines.png');
+  background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.hero-wrapper {
+  width: 100%;
+  margin-top: 30px;
+  height: 100%;
+  border-radius: 18px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.14) 4.13%,
+    rgba(255, 255, 255, 0.6) 80.29%
+  );
+  border: 1px solid #ffffff;
+  box-shadow: 0px 20px 50px 0px #4a55bc1a;
+}
+
+.trust-technology-section {
+  background: url('./assets/images/trust-bg-elem.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .trust-technology-section {
+    background: url('./assets/images/trust-bg-elem.png');
+    background-position: left;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 800px) {
+  .trust-technology-section {
+    background: url('./assets/images/trust-bg-elem.png');
+    background-size: 100% 80%;
+    background-position: -110px -100px;
+    background-repeat: no-repeat;
+  }
+}
+
+.why-chose-us {
+  background: url('./assets/images/Why-Choose.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ready-to-elevate {
+  background: url('./assets/images/ready-to-elevate.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.transform-factory {
+  background: url('./assets/images/industry-ready.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.book-a-demo {
+  background: url('./assets/images/background-image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.as-seen-on-bg {
+  background: url('./assets/images/Testimonial-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.quote-marks {
+  background: url('./assets/images/quote-mask.svg');
+  background-position: top left;
+  background-repeat: no-repeat;
+}
+
+.love-trust-bg {
+  background: url('./assets/images/love-trust-bg.png');
+  background-position: bottom left;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1024px) {
+  .hero-section {
+    background: url('./assets/images/mobile-hero-section-background.png');
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+
+  .how-it-works {
+    background: url('./assets/images/how-it-works.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .why-chose-us {
+    background: url('./assets/images/mobile-why-chose.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .as-seen-on-bg {
+    background: url('./assets/images/Testimonial-mobile.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .work-with-us {
+    background: url('./assets/images/work-with-us-mobile.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+  }
+}
+
+.form-label-help:hover + .help-icon-path,
+.form-label-help:hover .help-icon-path {
+  stroke: #ac31f8 !important;
+}
+
+.btn-gradient-outline {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#ffff, #ffff) padding-box,
+    linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%) border-box;
+}
+
+.btn-gradient-text {
+  background: linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.driver-popover {
+  background-color: #101828 !important;
+  color: white !important;
+  width: 320px !important;
+}
+
+.driver-popover-arrow {
+  border: 8px solid #101828 !important;
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+.driver-popover-title {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.driver-popover-description {
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+.driver-popover-footer button {
+  text-shadow: none !important;
+  @apply inline-flex items-center focus:bg-purple-500 justify-center rounded-md text-sm  font-semibold border-purple-500 hover:bg-purple-400 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-purple-500 text-white shadow-none;
+}
+
+.w-subheading {
+  width: calc(100vw - 116px);
+}
+
+.close {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.close.btn-line:nth-child(2) {
+  opacity: 0;
+}
+
+.close.btn-line:nth-child(1) {
+  -webkit-transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.close.btn-line:nth-child(3) {
+  -webkit-transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+.btn-line {
+  width: 28px;
+  height: 3px;
+  margin: 5px;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.menu-nav {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  gap: 2rem;
+  height: 100vh;
+  width: 250px;
+  padding: 10px;
+  background-color: #060310;
+  right: 0px;
+  top: 0px;
+  z-index: 5;
+}
+
+.chat-preview-btn {
+  background: linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%),
+    linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%);
+}
+.chat-preview-btn2 {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(93.57deg, #ff6c00 0%, #8a00e1 99.68%) border-box;
+}
+
+.scroller::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroller::-webkit-scrollbar-track {
+  display: none;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background: #7a23b0;
+  border-radius: 4px;
+}
+
+.try-out-btn {
+  background: linear-gradient(0deg, #dc3450, #dc3450), linear-gradient(0deg, #f5536e, #f5536e);
+  border: 1px solid #f5536e;
+  box-shadow: 0px 1px 2px 0px #1018280d;
+  color: white;
+  padding: 13px 51px;
+}
+
+.features-container {
+  background: url('./assets/images/background-autonomous.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: left top;
+  background-size: 100% 100%;
+  background-size: cover;
+}
+
+.features-frame-w-icon {
+  background: url('./assets/images/background-feature-w-icon.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: left top;
+  background-size: 100% 100%;
+  background-size: cover;
+}
+
+.features-farme {
+  background: url('./assets/images/features-frame.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  max-height: 440px;
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+  .features-container {
+    background: none;
+  }
+  .features-farme {
+    background-size: 100% 100%;
+  }
+}
+
+.scale-outreach-bg {
+  background: url('./assets/images/background-scale-outreach.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: top right;
+  background-size: cover;
+}
+
+.trust-in-tech-bg {
+  background: url('./assets/images/Trust-in-technology.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: left top;
+  background-size: cover;
+}
+
+.trust-in-farme {
+  background: url('./assets/images/features-frame.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 540px;
+}
+
+.semless-integration-bg {
+  background: url('./assets/images/Seamless-Integration.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: right;
+  background-size: cover;
+}
+
+.carousel-button {
+  border: 2px solid;
+}
+.carousel-button > svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.restaurant-container {
+  background: url('./assets/images/restaurant-background.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+}
+
+.industry-container {
+  background: url('./assets/images/industry-hero-bg.png');
+  background-repeat: no-repeat;
+  width: 100% 100%;
+  background-size: cover;
+}
+
+.pricing-background {
+  background: url('./assets/images/pricing-bg.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+}
+
+.subnav-scale {
+  overflow: hidden;
+  animation: scale 0.3s ease-in-out;
+}
+
+@keyframes scale {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 220px;
+  }
+}
+
+.features-card:hover {
+  animation: shadow 0.3s linear forwards;
+  box-shadow: 0 4px 0px transparent;
+}
+
+@keyframes shadow {
+  0% {
+    box-shadow: 0 1px 0 rgba(365, 0, 0);
+  }
+  100% {
+    box-shadow: 0 4px 0px rgba(365, 0, 0);
+  }
+}
+
+.why-choose-restaurant {
+  background: url('./assets/images/restaurant-bg.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+
+.restaurant-ready-to-experience {
+  position: relative;
+  background: url('./assets/images/restaurant-orange.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.restaurant-ready-to-experience::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url('./assets/images/restaurant-avocado.png');
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+
+.restaurant-ready-to-experience::after {
+  content: '';
+  position: absolute;
+  background: url('./assets/images/background-autonomous.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  background-position: left top;
+  background-size: 100% 100%;
+  background-size: cover;
+  z-index: -2;
+}
+
+@media (max-width: 800px) {
+  .restaurant-ready-to-experience::before {
+    opacity: 0.2;
+  }
+}
+
+.comparison-flow {
+  position: relative;
+  background: url('./assets/images/comparision-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.automated-marketing-container {
+  background: url('./assets/images/automated-marketing-bg.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+}
+
+.autonomous-section-container {
+  background: url('./assets/images/autonomous-agent-hero-bg.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+}
+
+.about-us-container {
+  background: url('./assets/images/about-us-hero-bg.png');
+  background-repeat: no-repeat;
+  width: 100% 100%;
+  background-size: cover;
+}
+
+.partners {
+  background: linear-gradient(93.57deg, #dc3450 0%, #e1401c 99.68%);
+}
+
+.discover-feature-card {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.14) 4.13%,
+    rgba(255, 255, 255, 0.6) 80.29%
+  );
+
+  border: 1px solid #ffffff;
+  box-shadow:
+    0px 20px 50px 0px #4a55bc1a inset,
+    0px 20px 50px 0px #4a55bc1a;
+}
+
+.discover-feature-container {
+  background: url('./assets/images/discover-feature-bg.png');
+  background-repeat: no-repeat;
+  width: 100% 100%;
+  background-size: cover;
+}
+
+.hero-section-dark-warpper {
+  background: url('./assets/home/hero-section-wrapper-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-line-pattern-bg {
+  background: url('./assets/home/hero-lines-pattern.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.professional-assistance-bg {
+  background: url('./assets/home/background-with-glows-and-texture.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.primary-gradient-text {
+  background: linear-gradient(93.57deg, #dc3450 0%, #e1401c 99.68%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-section-image-bg {
+  background: url('./assets/home/feature-background.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.new-call-to-action {
+  background: url('./assets/home/Call-to-action-bg.png'),
+    linear-gradient(93.47deg, rgba(255, 122, 0, 0.1) 0%, rgba(176, 10, 234, 0.1) 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ready-to-automate-bg {
+  background: url('./assets/home/ready-bannner-section.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.benifit-of-joining-bg {
+  background: url('./assets/home/benifit-joining.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.background-purple-gradient {
+  background: linear-gradient(93.57deg, #a634dc 0%, #5b1ce1 99.68%);
+  box-shadow: 0px 1px 2px 0px #1018280d;
+}
+.background-purple-primary {
+  background: linear-gradient(93.57deg, #a634dc 0%, #5b1ce1 99.68%);
+}
+.border-style {
+  border: 1px solid !important;
+}
+
+.background-cta {
+  background: url('./assets/home/background-cta.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.select-value-role .assitance-role-description,
+.select-value-role .assistance-role-tone {
+  display: none !important;
+}
+.select-value-role .assitance-role-label {
+  font-weight: 400 !important;
+}
+
+.custom-fab-loader {
+  width: 60px;
+  aspect-ratio: 4;
+  background: radial-gradient(circle closest-side, #fff 90%, #0000) 0 / calc(100% / 3) 100% space;
+  clip-path: inset(0 100% 0 0);
+  animation: l1 1s steps(4) infinite;
+}
+@keyframes l1 {
+  to {
+    clip-path: inset(0 -34% 0 0);
+  }
+}
+
+.preview-assistant {
+  height: 250px;
+}
+.preview-assistant > #shadow-root > .chat_area.screen {
+  min-height: 250px !important;
+  max-height: 250px !important;
+  height: 250px !important;
+}
+.sketch-picker {
+  box-shadow: none !important;
+  width: 280px !important;
+  z-index: 99999;
+}

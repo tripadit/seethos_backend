@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+
+
+{% block content %}
+  
+<h2>Upload a CSV file</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+    <input type="hidden" name="action" value="upload_data">
+    <input type="hidden" name="do_action" value="yes">
+    <input type="hidden" name="_selected_action" value={{queryset}}>
+    <button type="submit">Save changes</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+<!-- <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Apply">
+  </form> -->
+
+
+
+{% block content %}
+<form action="" method="post">
+ 
+<p>
+Article Details
+</p>  
+  
+{% csrf_token %}
+{{ form.as_p }}
+  <input type="hidden" name="action" value="generate_article">
+  
+  <input type="hidden" name="_selected_action" value="1">
+  <input type="hidden" name="do_action" value="yes">
+</form>
+{% endblock %}
+  

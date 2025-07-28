@@ -1,0 +1,59 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      env-file:
+        type: string
+        default: env/.env.docker
+      host:
+        type: string
+        default: $DEV_HOST
+    steps:
+      - checkout
+      - run:
+          name: deploy code to ec2 instance
+          command: |
+            ssh -o StrictHostKeyChecking=no << parameters.host >> 'exit'
+            ssh << parameters.host >> 'rm -rf ~/unrealai-api-server/ || true'
+            scp -r /home/circleci/project/ << parameters.host >>:~/unrealai-api-server/
+            ssh << parameters.host >> 'cd ~/unrealai-api-server && docker build -f compose/api.Dockerfile -t unrealai-api-server:latest .'
+            ssh << parameters.host >> 'cd ~/unrealai-api-server && docker container rm -f unrealai-api-server || true'
+            ssh << parameters.host >> 'cd ~/unrealai-api-server && docker image prune -f'
+            ssh << parameters.host >> "cd ~/unrealai-api-server && docker run -d --network frontend --env-file << parameters.env-file >> --name unrealai-api-server unrealai-api-server:latest"
+
+
+workflows:
+  version: 2
+
+  deploy-api-alpha:
+    jobs:
+      - deploy:
+          host: $DEV_HOST
+          env-file: env/.env.dev.docker
+          filters:
+            branches:
+              only:
+                - develop
+
+  deploy-api-prod:
+    jobs:
+      - deploy:
+          host: $PROD_HOST
+          env-file: env/.env.prod.docker
+          filters:
+            branches:
+              only:
+                - master
+
+  deploy-api-seethos:
+    jobs:
+      - deploy:
+          host: $SEETHOS
+          env-file: env/.env.seethos.docker
+          filters:
+            branches:
+              only:
+                - seethos

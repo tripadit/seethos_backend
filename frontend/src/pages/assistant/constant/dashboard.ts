@@ -1,0 +1,5 @@
+export enum DASHBOARDTRANINGSTATUS {
+  'UNTRAINED',
+  'TRAINING',
+  'TRAINED',
+}

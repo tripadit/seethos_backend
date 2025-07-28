@@ -1,0 +1,5 @@
+export const CAMPAIGNSTATUS = {
+  DRAFT: 'Draft',
+  NOTACTIVE: 'NOTACTIVE',
+  ACTIVE: 'ACTIVE',
+};

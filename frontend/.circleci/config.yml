@@ -1,0 +1,184 @@
+version: 2.1
+
+executors:
+  node-v18:
+    docker:
+      - image: cimg/node:18.18.2
+  ubuntu:
+    docker:
+      - image: cimg/base:2022.08
+
+jobs:
+  lint:
+    executor: node-v18
+    working_directory: ~/app
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Enable corepack
+          command: sudo corepack enable
+
+      - run:
+          name: Install dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Lint
+          command: yarn lint
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - node_modules/
+
+  build:
+    executor: node-v18
+    parameters:
+      environment:
+        type: string
+        default: development
+    working_directory: ~/app
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ./
+
+      - run:
+          name: Enable corepack
+          command: sudo corepack enable
+
+      - run:
+          name: Build
+          command: |
+            yarn build --mode << parameters.environment >>
+          environment:
+            NODE_OPTIONS: '--max-old-space-size=4096'
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist/
+            - docker/
+            - env/
+            - scripts/
+            - docker-entrypoint.sh
+
+  deploy:
+    executor: ubuntu
+
+    parameters:
+      env-file:
+        type: string
+        default: .env.docker
+      dockerfile:
+        type: string
+        default: dev.Dockerfile
+      host:
+        type: string
+        default: $DEV_HOST
+
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Docker ssh setup
+          command: |
+            mkdir -p ~/.ssh && chmod 700 ~/.ssh
+            echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+      - run:
+          name: Move file to server
+          command: |
+            ssh << parameters.host >> "rm -rf ~/unrealai-web/ || true"
+            tar -czf /tmp/webapp.tar.gz .
+            scp /tmp/webapp.tar.gz << parameters.host >>:/tmp/
+            ssh << parameters.host >> "mkdir ~/unrealai-web/ && tar -xzf /tmp/webapp.tar.gz -C ~/unrealai-web/ && rm -f /tmp/webapp.tar.gz"
+
+      - run:
+          name: Deploy to dev service
+          command: |
+            ssh << parameters.host >> "cd unrealai-web && docker build -f << parameters.dockerfile >> -t unreal-ai-web:latest ."
+            ssh << parameters.host >> "cd unrealai-web && docker container rm -f unreal-ai-web || true"
+            ssh << parameters.host >> "cd unrealai-web && docker image prune -f"
+            ssh << parameters.host >> "cd unrealai-web && docker run -d --env-file env/<< parameters.env-file >> --network frontend  --name unreal-ai-web --memory=2g --cpus=1 unreal-ai-web:latest"
+
+workflows:
+  version: 2
+
+  test:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - main
+      - build:
+          environment: development
+          requires:
+            - lint
+
+  deploy_web_alpha:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only:
+                - develop
+      - build:
+          environment: development
+          requires:
+            - lint
+      - deploy:
+          dockerfile: docker/dev.Dockerfile
+          env-file: .env.dev.docker
+          host: $DEV_HOST
+          requires:
+            - build
+
+  deploy_web_prod:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only:
+                - main
+      - build:
+          environment: production
+          requires:
+            - lint
+      - deploy:
+          dockerfile: docker/prod.Dockerfile
+          env-file: .env.prod.docker
+          host: $PROD_HOST
+          requires:
+            - build
+  
+  deploy_web_seethos:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only:
+                - seethos
+      - build:
+          environment: production
+          requires:
+            - lint
+      - deploy:
+          dockerfile: docker/seethos.Dockerfile
+          env-file: .env.seethos.docker
+          host: $SEETHOS
+          requires:
+            - build

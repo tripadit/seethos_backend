@@ -1,0 +1,47 @@
+
+# Project Title:
+Seethos AI Assistant for Research and Communication
+
+# Project Overview:
+The Seethos AI Assistant is being developed to support researchers, analysts, and communication officers by automating tasks such as document summarization, data extraction, translation (Nepali-English), chatbot management, and report generation.
+
+# Core Features:
+- Intelligent document summarization (including PDFs, research papers, and news articles)
+- Keyword-based search and extraction
+- Nepali-English translation for both formal and informal content
+- Chatbot configuration based on uploaded prompts and context files
+- Scalable backend with support for API integration and user feedback collection
+
+# Target Users:
+- Researchers at the Institute for Integrated Development Studies (IIDS)
+- Policy analysts and field experts
+- Project managers working on development issues (climate, water, trade)
+- Communication teams managing digital platforms and data storytelling
+
+# Tech Stack:
+- Frontend: React + TailwindCSS
+- Backend: FastAPI (Python)
+- Database: PostgreSQL
+- File Storage: AWS S3
+- AI: OpenAI GPT-4 API
+- Web Crawling: Playwright with Python
+- Deployment: Ubuntu EC2 + PM2
+
+# Functional Requirements:
+1. Upload and analyze documents (PDF, DOCX, TXT)
+2. Automatically extract and summarize key content based on user-provided keywords
+3. Summarize text in both English and Nepali
+4. Train chatbot using plain text, Q&A pairs, or project brief documents
+5. Store and retrieve summaries through a web dashboard
+
+# Non-Functional Requirements:
+- System must respond within 5 seconds for normal queries
+- Interface must support uploads up to 25 MB
+- All data must be stored securely and comply with local data protection laws
+
+# Example Use Case:
+A user uploads a report titled "Nepal Hydropower Development 2023". The assistant summarizes the executive summary, highlights mentions of "India", and returns key insights in both Nepali and English. The chatbot is then trained on this file to answer related questions.
+
+# Contact:
+Project Lead: Adit Tripathi
+Email: adit@seethos.com

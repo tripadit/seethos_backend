@@ -1,0 +1,75 @@
+.ai-assistance-input {
+  width: 100%;
+  height: 38px;
+  text-indent: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 8px, 16px, 8px, 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(176, 176, 176, 1);
+}
+
+.ai-assistance-input:focus,
+.ai-assistance-input:active,
+.ai-assistance-input:hover {
+  border: 0.76px solid rgba(157, 45, 226, 1);
+}
+
+.ai-assistance-footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* margin-bottom: 10px; */
+}
+
+.input-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.input_section_send_icon {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.1s all linear;
+  color: rgba(157, 45, 226, 1);
+}
+
+.input_section_send_icon:hover > svg {
+  stroke: rgba(157, 45, 226, 1);
+  transform: scale(1.1);
+}
+
+.input-padding {
+  padding-right: 40px;
+}
+
+.mobile_action_button {
+  display: none;
+  padding: 0px 10px;
+  border-radius: 6.09px;
+  color: white;
+  @apply bg-secondary-gradient text-white hover:opacity-80;
+}
+
+@media screen and (max-width: 800px) {
+  .mobile_action_button {
+    display: flex;
+  }
+}
+
+.action_button_simple {
+  display: none;
+  padding: 0px 10px;
+  border-radius: 6.09px;
+  color: white;
+  @apply bg-secondary-gradient text-white hover:opacity-80;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subscribe</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Subscribe</h1>
+        <form method="post" action="{% url 'subscribe' %}" id="payment-form">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <br>
+            <label for="subscription_type">Subscription Type:</label>
+            <select name="subscription_type" id="subscription_type">
+                <option value="free">Free</option>
+                <option value="general">General ($5/month)</option>
+                <option value="advance">Advance ($10/month)</option>
+            </select>
+            <br>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</body>
+</html>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('pk_test_51MU1VvE0li5sPcu78LwRr2XO0FjdbmEi9waAYwSyz1zkWDDNIzaV69Nd5OZE9xNri3PBPMzb19iNArCrA43ujiMz00JYpQyAJb');
+
+    var paymentForm = document.getElementById('payment-form');
+    var subscriptionType = document.getElementById('subscription_type');
+
+    paymentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var priceId;
+        if (subscriptionType.value === 'free') {
+            priceId = 'price_1H7Qg2Kq3zXZjK8ZdJ7NU5ER';
+        } else if (subscriptionType.value === 'general') {
+            priceId = 'price_1H7Qg2Kq3zXZjK8ZdJ7NU5ER';
+        } else if (subscriptionType.value === 'advance') {
+            priceId = 'price_1H7Qg2Kq3zXZjK8ZdJ7NU5ER';
+        }
+        stripe.redirectToCheckout({
+            lineItems: [{price: priceId, quantity: 1}],
+            mode: 'subscription',
+            successUrl: 'https://example.com/success',
+            cancelUrl: 'https://example.com/cancel',
+        }).then(function (result) {
+            if (result.error) {
+                console.log(result.error.message);
+            }
+        });
+    });
+</script>

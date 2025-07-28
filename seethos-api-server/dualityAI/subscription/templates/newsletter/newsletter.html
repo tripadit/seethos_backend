@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        color: white;
+      }
+      .body {
+        background-color: #333333;
+        padding-top: 30px;
+      }
+      .content {
+        max-width: 1024px;
+        width: 100%;
+        height: 100%;
+        padding-bottom: 100px;
+      }
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
+      .flex-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo-title {
+        font-size: 24px;
+        line-height: 36px;
+        color: white;
+        font-weight: 400;
+      }
+      .main-box {
+        max-width: 900px;
+        height: 393px;
+        border: 16px solid #434343;
+        filter: drop-shadow(0px 18px 14px rgba(0, 0, 0, 0.69));
+        position: relative;
+        width: 100%;
+        display: block;
+        /* background-color: #808; */
+        background-image: url(https://newsletter-file.s3.amazonaws.com/newsletter_icon/Group\ 48096815.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center, 100%, 100%;
+      }
+      .box-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        flex: 1;
+        height: 100%;
+        text-align: center;
+      }
+      .box-content > h2 {
+        /* padding: 10px; */
+        color: white;
+        font-weight: 700;
+        font-size: 50px;
+      }
+      .margin {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        margin-bottom: 70px;
+      }
+      .highlight-text {
+        width: 914px;
+        height: 234px;
+        font-family: "Gaegu";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 78px;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        color: #ffffff;
+        position: absolute;
+        top: 10px;
+        left: 120px;
+        z-index: 10;
+      }
+      .highlight-box {
+        position: relative;
+        max-width: 1119.5px;
+        height: 314.5px;
+        width: 100%;
+      }
+      .comma {
+        position: absolute;
+        right: 0px;
+        bottom: 0;
+      }
+      .center-element {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .second-section {
+        width: 100%;
+        height: auto;
+      }
+
+      .main-text {
+        font-family: "Inria Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 33px;
+        line-height: 40px;
+        text-align: justify;
+      }
+      .content-image {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      #multi-bg {
+        height: auto;
+        display: block;
+        /* background-color: #808; */
+        background-image: url(https://newsletter-file.s3.amazonaws.com/newsletter_icon/second-section.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center, 100%, 100%;
+        width: 100%;
+        padding-top: 200px;
+        padding-bottom: 200px;
+      }
+      .popular {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 72px;
+        /* identical to box height */
+
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .display-column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .popular-item {
+        max-width: 1120px;
+        height: 380px;
+        background: #484848;
+        opacity: 0.6;
+        border-radius: 52px;
+        display: flex;
+        flex-direction: row;
+      }
+      .popular-image {
+        width: 289px;
+        height: 380px;
+        border-radius: 52px 0px 0px 52px;
+      }
+      .popular-card-content {
+        padding: 10px 20px;
+        color: white;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .popular-card-content > h1 {
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 60px;
+        text-transform: capitalize;
+        color: #ffffff !important;
+      }
+      .time {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .contact {
+        height: auto;
+        width: 100%;
+        padding-top: 240px;
+      }
+      .contact-wrapper{
+        width: 100%;
+        background-color: #00b6ce;
+
+      }
+      #contact {
+        height: auto;
+        display: block;
+        /* background-color: #808; */
+        background-image: url(https://newsletter-file.s3.amazonaws.com/newsletter_icon/contact.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position:top top, 100%;
+        width: 100%;
+      }
+      .about-us-card {
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+        flex: 1;
+        width: 100%;
+        text-align: left;
+      }
+      /* .about-content {
+        padding-top: 200px;
+      } */
+      .about-us-content {
+        flex: 0.7;
+      }
+      .about-us-content > h1 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 60px;
+        /* identical to box height */
+
+        text-transform: capitalize;
+
+        color: #ffffff;
+      }
+      .decription {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 38px;
+        color: #ffffff;
+      }
+      .image-about {
+        flex: 0.3;
+        justify-self: center;
+        align-self: center;
+      }
+      .reverse-row {
+        flex-direction: row-reverse;
+        text-align: right;
+      }
+      .contact-us {
+        width: 222px;
+        height: 46px;
+        background: #ffffff;
+        border-radius: 45px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        /* identical to box height */
+
+        color: #00b6ce;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        margin: 0 auto;
+        margin-top: 150px;
+      }
+      .footer {
+        border-top: 1px solid #0066FF;
+      
+      }
+      .icon-display{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        gap: 10px;
+        flex: 1;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .icons{
+        width: 63px;
+height: 66.95px;
+      }
+      @media (max-width: 768px) {
+        #multi-bg {
+          padding-top: 100px;
+          padding-bottom: 100px;
+        }
+        .main-text {
+          font-family: "Inria Sans";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          text-align: justify;
+        }
+        .highlight-text {
+          width: 250px;
+          height: 234px;
+          font-size: 20px;
+          line-height: 50px;
+          text-transform: uppercase;
+          color: #ffffff;
+          position: absolute;
+          top: 20px;
+          left: 40px;
+        }
+
+        .comma {
+          position: absolute;
+          right: 0px;
+          bottom: 0;
+          height: 80px;
+          width: 80px;
+        }
+        .comma-first {
+          height: 80px;
+          width: 80px;
+        }
+        .logo {
+          width: 40px;
+          height: 40px;
+        }
+        .logo-title {
+          font-size: 14px;
+          line-height: 26px;
+          color: white;
+          font-weight: 400;
+        }
+        .box-content > h2 {
+          /* padding: 10px; */
+          color: white;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+        }
+        .main-box {
+          height: 245px;
+        }
+        .popular {
+          font-style: normal;
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 29px;
+          /* identical to box height */
+
+          text-transform: uppercase;
+
+          color: #ffffff;
+          text-align: center;
+        }
+        .popular-item {
+          height: 95px;
+          border-radius: 19.5px;
+        }
+
+        .popular-image {
+          width: 76px;
+          height: 95px;
+          border-radius: 19.5px 0px 0px 19.5px;
+        }
+        .popular-card-content {
+          padding: 5px 10px;
+          color: white;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .popular-card-content > h1 {
+          font-style: normal;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 14px;
+          text-transform: capitalize;
+          color: #ffffff;
+        }
+        .time {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 12px;
+          display: flex;
+          align-items: center;
+
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-us-card {
+          display: flex;
+          flex-direction: column-reverse;
+          gap: 20px;
+          flex: 1;
+          width: 100%;
+          text-align: center;
+        }
+
+        .about-us-image {
+          height: 100px;
+          width: 200px;
+        }
+        .about-us-content > h1 {
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 22px;
+          /* identical to box height */
+
+          text-transform: capitalize;
+
+          color: #ffffff;
+        }
+        .decription {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          text-align: center;
+
+          color: #ffffff;
+        }
+        .image-about {
+          flex: 0.1;
+          justify-self: center;
+          align-self: center;
+        }
+        .reverse-row {
+          flex-direction: column-reverse;
+          text-align: center;
+        }
+        .contact {
+          height: auto;
+          width: 100%;
+          padding-top: 100px;
+        }
+        .icons{
+          width: 20.61px;
+          height: 22px;
+        }
+      }
+
+      @media (max-width: 1024px) and (min-width:768px) {
+        #multi-bg {
+          padding-top: 100px;
+          padding-bottom: 100px;
+        }
+        .main-text {
+        font-family: "Inria Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 35px;
+        text-align: justify;
+      }
+        .highlight-text {
+          width:700px;
+          height: 234px;
+          font-size: 24px;
+          line-height: 50px;
+          text-transform: uppercase;
+          color: #ffffff;
+          position: absolute;
+          top: 20px;
+          left: 40px;
+        }
+
+        .comma {
+          position: absolute;
+          right: 0px;
+          bottom: 0;
+          height: 80px;
+          width: 80px;
+        }
+        .comma-first {
+          height: 80px;
+          width: 80px;
+        }
+        /* .logo {
+          width: 40px;
+          height: 40px;
+        } */
+        /* .logo-title {
+          font-size: 14px;
+          line-height: 26px;
+          color: white;
+          font-weight: 400;
+        } */
+        .box-content > h2 {
+          /* padding: 10px; */
+          color: white;
+          font-weight: 700;
+          font-size: 25px;
+          line-height: 34px;
+        }
+        .main-box {
+          height: 245px;
+        }
+        .popular-item {
+        max-width: 1120px;
+        height: 300px;
+        background: #484848;
+        opacity: 0.6;
+        border-radius: 52px;
+        display: flex;
+        flex-direction: row;
+      }
+      .popular-image {
+        width: 289px;
+        height: 300px;
+        border-radius: 52px 0px 0px 52px;
+      }
+      .popular-card-content {
+        padding: 10px 20px;
+        color: white;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .popular-card-content > h1 {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 40px;
+        text-transform: capitalize;
+        color: #ffffff !important;
+      }
+      .time {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+        
+      .about-us-card {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        flex: 1;
+        width: 100%;
+        text-align: left;
+        justify-content: start;
+      }
+      .about-us-image {
+          height: 300px;
+          width: 300px;
+        }
+      /* .about-content {
+        padding-top: 200px;
+      } */
+      .about-us-content {
+        flex: 0.7;
+      }
+      .about-us-content > h1 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 60px;
+        /* identical to box height */
+
+        text-transform: capitalize;
+
+        color: #ffffff;
+      }
+      .decription {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 38px;
+        color: #ffffff;
+      }
+      .image-about {
+        flex: 0.3;
+        justify-self: center;
+        align-self: center;
+      }
+      .reverse-row {
+        flex-direction: row-reverse;
+        text-align: right;
+      }
+      .contact-us {
+        width: 222px;
+        height: 46px;
+        background: #ffffff;
+        border-radius: 45px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        /* identical to box height */
+
+        color: #00b6ce;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        margin: 0 auto;
+        margin-top: 150px;
+      }
+    
+      .icons{
+        width: 63px;
+height: 66.95px;
+      }
+      .contact {
+        height: auto;
+        width: 100%;
+        padding-top: 140px;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="body">
+      <div class="center-element">
+        <div class="content">
+          <div class="flex-row">
+            <img
+              src="https://seethos.ai/wp-content/uploads/2022/10/Transparent-seethos-AI-1.png"
+              class="logo"
+              alt="seethos ai"
+            />
+            <h1 class="logo-title">seethos.ai</h1>
+          </div>
+          <div class="margin">
+            <div class="main-box">
+              <div class="box-content">
+                <h2>{{title}}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/Vector1.svg" class="comma-first" />
+            <h1 class="highlight-text">
+              {{highlight}}
+            </h1>
+            <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon//Vector.svg" class="comma" />
+          </div>
+        </div>
+      </div>
+
+      <div class="second-section" id="multi-bg">
+        <div class="second-section-content">
+          <div class="center-element">
+            <div class="content">
+              <img src="{{post_image}}" class="content-image" />
+              <p>{{content}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="center-element">
+        <div class="content">
+          <h1 class="popular">Popular</h1>
+          <div class="display-column">
+            <div class="popular-item">
+              <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/post-card.svg" class="popular-image" />
+              <div class="popular-card-content">
+                <h1>{{popular_1_title}}</h1>
+                <p class="time">{{popular_time}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact" id="contact">
+        <div class="contact-wrapper">
+        <div class="center-element">
+          <div class="content about-content">
+            <div class="about-us-card">
+              <div class="about-us-content">
+                <h1 class="about-us">About Us</h1>
+                <p class="decription">
+                  We use our knowledge in design, engineering, marketing and
+                  business to create a living and breathing product that can be
+                  scaled to Billions of users. At seethos AI, our success is
+                  directly correlated to your success..
+                </p>
+              </div>
+              <div class="image-about">
+                <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/Group.svg" alt="about-us" class="about-us-image" />
+              </div>
+            </div>
+            <div class="about-us-card reverse-row">
+              <div class="about-us-content">
+                <h1 class="about-us">Our Values</h1>
+                <p class="decription">
+                  Lead By Example: We lead by example by delivering excellence,
+                  incorporating quality in our daily practice.
+                </p>
+              </div>
+              <div class="image-about">
+                <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/Group.svg" alt="about-us" class="about-us-image" />
+              </div>
+            </div>
+            <div class="about-us-card">
+              <div class="about-us-content">
+                <h1 class="about-us">Our Mission</h1>
+                <p class="decription">
+                  Idea to Product: We convert any business idea or an invention
+                  to a living, breathing and profit yielding product.
+                </p>
+              </div>
+              <div class="image-about">
+                <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/Group.svg" alt="about-us" class="about-us-image" />
+              </div>
+            </div>
+            <a href="" class="contact-us">Contact Us</a>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="center-element">
+            <!-- <div class="content "> -->
+              <div class="icon-display"> 
+              <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/ticktok.svg" alt="facebook" class="icons"/>
+              <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/Instagram.svg" alt="facebook" class="icons"/>
+              <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/facebook.svg" alt="facebook" class="icons"/>
+              <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/skype.svg" alt="facebook" class="icons"/>
+              <img src="https://newsletter-file.s3.amazonaws.com/newsletter_icon/Instagram.svg" alt="facebook" class="icons"/>
+              </div>
+
+              <!-- </div> -->
+        </div>
+        </div>
+    
+      </div>
+    </div>
+  </body>
+</html>
